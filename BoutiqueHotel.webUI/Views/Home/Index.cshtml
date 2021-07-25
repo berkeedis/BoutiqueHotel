@@ -1,0 +1,92 @@
+@model ProductListViewModel
+
+
+<div style="margin-bottom:60px;" class="row justify-content-center">
+    <div class="col-md-9">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="/products/food">
+                        <img src="~/img/yemek-kapak.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>MEALS</h5>
+                            <p>Flavors that will make you feel good...</p>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="carousel-item">
+                    <a href="/products/beverage">
+                        <img src="~/img/icecek-kapak.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>BEVERAGES</h5>
+                            <p>An icy relief.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="/products/dessert">
+                        <img src="~/img/tatlı-kapak.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>DESSERTS</h5>
+                            <p>Fine touches that will make you fall into a sweet sleep...</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="/products/room-service">
+                        <img src="~/img/room_services.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>ROOM SERVICES</h5>
+                            <p>Small happiness that you can order to your room...</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="/products/hotel-service">
+                        <img src="~/img/hotel-services.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>HOTEL SERVICES</h5>
+                            <p>Perfect for having fun...</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-md-3">
+                    @await Html.PartialAsync("_product", product)
+                </div>
+            }
+        </div>
+    </div>
+</div>

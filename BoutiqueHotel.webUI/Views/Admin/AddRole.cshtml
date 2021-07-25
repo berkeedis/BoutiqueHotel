@@ -1,0 +1,23 @@
+@model RoleModel
+
+<h3>Add Admin Role</h3>
+<hr>
+
+
+<div class="row">
+    <div class="col-md-2">
+        @await Html.PartialAsync("_adminselect")
+    </div>
+    <div class="col-md-8 ">
+        <form asp-controller="Admin" asp-action="AddRole" method="POST">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">ADD ROLE</button>
+        </form>
+    </div>
+</div>
+
+<div style="margin-top: 28em;"></div>

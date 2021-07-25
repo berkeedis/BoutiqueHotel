@@ -1,0 +1,120 @@
+@model CategoryModel
+
+@section PagingCss
+{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+}
+
+@section PagingScript
+{
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+}
+
+<h3>Edit Category</h3>
+<hr>
+<div class="row">
+    <div class="col-md-2">
+        @await Html.PartialAsync("_adminselect")
+    </div>
+    <div class="col-md-2">
+        <form action="/admin/editcategory" method="POST">
+            <input type="hidden" name="CategoryId" value="@Model.CategoryId">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Url" class="form-label"></label>
+                <input class="form-control" asp-for="Url">
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">SAVE CHANGES</button>
+
+            <div id="products">
+                @for (int i = 0; i < Model.Products.Count; i++)
+                {
+                    <input type="hidden" name="Products[@i].ProductId" value="@Model.Products[@i].ProductId">
+                    <input type="hidden" name="Products[@i].ImageUrl" value="@Model.Products[@i].ImageUrl">
+                    <input type="hidden" name="Products[@i].Name" value="@Model.Products[@i].Name">
+                    <input type="hidden" name="Products[@i].Content" value="@Model.Products[@i].Content">
+                    <input type="hidden" name="Products[@i].Description" value="@Model.Products[@i].Description">
+                    <input type="hidden" name="Products[@i].Price" value="@Model.Products[@i].Price">
+                    <input type="hidden" name="Products[@i].IsApproved" value="@Model.Products[@i].IsApproved.ToString()">
+                }
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <div class="col-md-12">
+            <table data-page-length='10' id="myTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Image</td>
+                        <td>Name</td>
+                        <td>Content</td>
+                        <td>Price</td>
+                        <td style="text-align: center;">Approved</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model.Products.Count > 0)
+                    {
+                        @foreach (var i in Model.Products)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@i.ProductId</td>
+                                <td><img src="~/img/@i.ImageUrl" width="80px"></td>
+                                <td>@i.Name</td>
+                                <td>@i.Content</td>
+                                <td style="text-align: center;">@i.Price ₺</td>
+                                <td style="text-align: center;">
+                                    @if (i.IsApproved)
+                                    {
+                                        <div style="color:green;" class="row">
+                                            <i class="fas fa-check-circle fa-2x"></i>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div style="color:red;" class="row">
+                                            <i class="fas fa-times-circle fa-2x"></i>
+                                        </div>
+                                    }
+                                </td>
+                                <td style="text-align: center;">
+
+                                    <a href="/admin/products/@i.ProductId" class="btn btn-primary btn-sm mr-2">EDIT</a>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <h3>No Products</h3>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 495px;"></div>

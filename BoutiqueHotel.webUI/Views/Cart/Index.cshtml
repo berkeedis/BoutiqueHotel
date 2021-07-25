@@ -1,0 +1,90 @@
+@model CartModel
+
+
+<h3>Order cart</h3>
+<hr>
+
+@if (Model.CartItems.Count == 0)
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning">
+                Cart is empty
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <div class="text-left">
+                    <h4>Cart items</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>Product</td>
+                                <td>Content</td>
+                                <td>Price</td>
+                                <td>Qantity</td>
+                                <td>Total</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.CartItems)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/img/@i.ImageUrl" width="80px;" alt="">
+                                    </td>
+                                    <td>@i.Name</td>
+                                    <td>@i.Content</td>
+                                    <td>@i.Price.ToString("0.00")₺</td>
+                                    <td style="text-align:center;">@i.Qantity</td>
+                                    <td>@(i.Price*i.Qantity)₺</td>
+                                    <td>
+                                        <form asp-controller="Cart" asp-action="DeleteFromCart" method="POST">
+                                            <input type="hidden" name="productId" value="@i.ProductId">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-times fa-tw"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-left">
+                <h4 style="text-align:center;">Cart summary</h4>
+                <hr>
+            </div>
+            <table>
+                <tbody>
+                    <tr style="font-size: x-large;">
+                        <th>Cart total: </th>
+                        <td>@Model.CartTotalPrice().ToString("0.00") ₺</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="mb-3">
+            <div style="padding-top: 2em;" class="text-center">
+                <a href="/products" class="btn btn-primary">
+                    <i class="fa fa-arrow-circle-left fa-fw"></i> Continue shopping
+                </a>
+                <a href="/checkout" class="btn btn-success">
+                    <i class="fa fa-arrow-circle-right fa-fw"></i> Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+}
+<div style="margin-top: 40em;"></div>

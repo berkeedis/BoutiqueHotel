@@ -1,0 +1,12 @@
+@model List<Category>
+
+<div class="list-group">
+    <a href="/products" class="list-group-item list-group-item-action">ALL CATEGORIES</a>
+
+    @foreach (var i in Model)
+    {
+        <a href="/products/@i.Url"
+        class="list-group-item list-group-item-action @(ViewBag.SelectedCategory == i.Url?"active":"")">
+            @i.Name</a>
+    }
+</div>

@@ -1,0 +1,53 @@
+@model CategoryListViewModel
+
+<h3>Admin Categories</h3>
+<hr>
+
+<div class="row">
+    <div class="col-md-2">
+        @await Html.PartialAsync("_adminselect")
+    </div>
+    <div class="col-md-10">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td style="width: 30px;">ID</td>
+                    <td>Name</td>
+                    <td style="width: 150px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.Categories.Count > 0)
+                {
+                    @foreach (var i in Model.Categories)
+                    {
+                        <tr>
+
+                            <td>@i.CategoryId</td>
+                            <td>@i.Name</td>
+
+                            <td style="text-align: center;">
+
+                                <a href="/admin/categories/@i.CategoryId" class="btn btn-primary btn-sm mr-2">EDIT</a>
+
+                                <form action="/admin/deletecategory" method="POST" style="display: inline;">
+                                    <input type="hidden" name="categoryId" value="@i.CategoryId">
+                                    <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>No Categories</h3>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="margin-top: 440px;"></div>

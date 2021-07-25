@@ -1,0 +1,36 @@
+@model LoginModel
+
+<h3>Login</h3>
+<hr>
+
+<form action="/account/login" method="POST">
+
+    <div class="col-md-4 justify-content-center text-align-center">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3 ">
+            <label asp-for="Email" class="form-label"></label>
+            <input class="form-control" asp-for="Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input class="form-control" asp-for="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Login</button>
+        <a href="/account/forgotpassword" class="btn btn-link">Forgot Password</a>
+
+    </div>
+
+</form>
+
+<div style="margin-top: 31em;"></div>
+
+@section Scripts
+{
+<script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,104 @@
+@model ProductListViewModel
+
+@section PagingCss
+{
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+}
+
+@section PagingScript
+{
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+}
+
+<h3>Admin Products</h3>
+<hr>
+
+<div class="row">
+    <div class="col-md-2">
+        @await Html.PartialAsync("_adminselect")
+    </div>
+    <div class="col-md-10">
+        <table data-page-length='7' id="myTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Image</td>
+                    <td>Name</td>
+                    <td>Content</td>
+                    <td>Price</td>
+                    <td style="text-align: center;">Homepage</td>
+                    <td style="text-align: center;">Approved</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.Products.Count > 0)
+                {
+                    @foreach (var i in Model.Products)
+                    {
+                        <tr>
+                            <td style="text-align: center;">@i.ProductId</td>
+                            <td><img src="~/img/@i.ImageUrl" width="80px"></td>
+                            <td>@i.Name</td>
+                            <td>@i.Content</td>
+                            <td style="text-align: center;">@i.Price ₺</td>
+                            <td style="text-align: center;">
+                                @if (i.IsHome)
+                                {
+                                    <div style="color:green; " class="row">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="color:red; " class="row">
+                                        <i class="fas fa-times-circle fa-2x"></i>
+                                    </div>
+                                }
+                            </td>
+                            <td style="text-align: center;">
+                                @if (i.IsApproved)
+                                {
+                                    <div style="color:green;" class="row">
+                                        <i class="fas fa-check-circle fa-2x"></i>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="color:red;" class="row">
+                                        <i class="fas fa-times-circle fa-2x"></i>
+                                    </div>
+                                }
+                            </td>
+                            <td style="text-align: center;">
+
+                                <a href="/admin/products/@i.ProductId" class="btn btn-primary btn-sm mr-2">EDIT</a>
+
+                                <form action="/admin/deleteproduct" method="POST" style="display: inline;">
+                                    <input type="hidden" name="productId" value="@i.ProductId">
+                                    <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>No Products</h3>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="margin-top: 40em;"></div>

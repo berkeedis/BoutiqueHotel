@@ -1,0 +1,24 @@
+@model Product
+
+
+<div style="height: 400px;" class="card mb-4">
+    <img style="max-width: 100%; height: auto;" class="card-img-top" src="~/img/@Model.ImageUrl" alt="">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Content</p>
+        <p class="card-text">@Model.Price ₺</p>
+        <a style="position: absolute;right: 10px;bottom:10px;" href="/@Model.Url"
+            class="btn btn-primary btn-md">Details</a>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-controller="Cart" asp-action="AddToCart" method="POST">
+                <input type="hidden" name="productId" value="@Model.ProductId">
+                <input type="hidden" name="quantity" value="1">
+                <button style="position: absolute;right: 6em;bottom:10px;" type="submit" class="btn btn-success btn-md">Add
+                    to cart</button>
+            </form>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,30 @@
+@model CategoryModel
+
+<h3>Add Category</h3>
+<hr>
+
+
+<div class="row">
+    <div class="col-md-2">
+        @await Html.PartialAsync("_adminselect")
+    </div>
+    <div class="col-md-8 ">
+        <form asp-controller="Admin" asp-action="AddCategory" method="POST">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" aria-describedby="nameHelp" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Url" class="form-label"></label>
+                <input class="form-control" aria-describedby="urlHelp" asp-for="Url">
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">ADD CATEGORY</button>
+        </form>
+    </div>
+</div>
+
+<div style="margin-top: 28em;"></div>

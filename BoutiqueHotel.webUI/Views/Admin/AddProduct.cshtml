@@ -1,0 +1,62 @@
+@model ProductModel
+
+<h3>Add Product</h3>
+<hr>
+
+<form action="/admin/addproduct" method="POST">
+    <div class="row">
+        <div class="col-md-2">
+            @await Html.PartialAsync("_adminselect")
+        </div>
+        <div class="col-md-8 ">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input class="form-control" asp-for="Price">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea class="form-control" asp-for="Content"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea id="editor" class="form-control" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Url" class="form-label"></label>
+                <input class="form-control" asp-for="Url">
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageUrl" class="form-label"></label>
+                <input class="form-control" asp-for="ImageUrl">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">ADD PRODUCT</button>
+
+        </div>
+    </div>
+</form>
+<div style="margin-top: 40px;"></div>
+
+@section Scripts
+{
+<script src="/modules/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+}

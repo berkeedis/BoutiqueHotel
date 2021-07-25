@@ -1,0 +1,73 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap">
+                    </use>
+                </svg>
+            </a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-2 text-danger">Boutique HOTEL</a></li>
+                    <li><a href="/products" class="nav-link px-2 text-white">MENU</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">ROOMS</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">ABOUT</a></li>
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li><a href="/admin/products" class="nav-link px-2 text-primary">ADMIN PANEL</a></li>
+                        <li><a href="/allorders" class="nav-link px-2 text-danger">ORDERS</a></li>
+                    }
+
+                    @if (User.IsInRole("waiters"))
+                    {
+                        <li><a href="/allorders" class="nav-link px-2 text-danger">ORDERS</a></li>
+                    }
+
+                </ul>
+                <form action="/search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-5 d-flex">
+                    <input name="q" type="search" class="form-control form-control-dark" placeholder="Arama yap"
+                    aria-label="Search">
+                    <button style="margin-left:10px;" class="btn btn-outline-success" type="submit">SEARCH</button>
+                </form>
+                <div style="color:white; margin-left:10px; margin-right:10px;" class="row">
+                    <a href="/cart" class="fas fa-shopping-cart fa-2x"></a>
+                </div>
+
+                <div class="dropdown text-end d-flex flex-wrap"><a href="#"
+                    class="d-block link-warning text-decoration-none dropdown-toggle" id="dropdownUser1"
+                    data-bs-toggle="dropdown" aria-expanded="false">@User.Identity.Name
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a href="/orders" class="dropdown-item">ORDER</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a href="/account/logout" class="dropdown-item">LOGOUT</a></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-2 text-danger">Boutique HOTEL</a></li>
+                    <li><a href="/products" class="nav-link px-2 text-white">MENU</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">ROOMS</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">ABOUT</a></li>
+                </ul>
+
+                <form action="/search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex">
+                    <input name="q" type="search" class="form-control form-control-dark" placeholder="Arama yap"
+                    aria-label="Search">
+                    <button style="margin-left:10px;" class="btn btn-outline-success" type="submit">SEARCH</button>
+                </form>
+                <div class="text-end">
+                    <a href="/account/login" type="button" class="btn btn-outline-light me-2">LOGIN</a>
+                    <a href="/account/register" type="button" class="btn btn-warning">REGISTER</a>
+                </div>
+            }
+        </div>
+    </div>
+</header>
